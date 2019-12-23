@@ -1,0 +1,114 @@
+#create projet symfony
+composer create-project symfony/website-skeleton name_project
+composer create-project symfony/skeleton name_project
+
+#install bundle maker
+composer require symfony/maker-bundle --dev
+
+#clear cache
+php bin/console cache:clear
+
+#install bundle
+composer require symfony/web-server-bundle --dev
+
+#run server 
+php bin/console server:run
+
+# twig
+composer require twig
+
+#annotations
+composer require doctrine/annotations
+
+#create controller
+php bin/console make:controller AdminController
+
+
+ /**
+  
+   * @var Environment
+   
+ */
+ 
+   private $twig;
+
+    
+    public function __construct($twig) {
+       
+		 $this->twig = $twig; 
+	}
+
+#services
+App\Controller\HomeController:
+       
+	tags: ['controller.service_arguments']
+       
+	arguments:      
+          
+		$twig: '@twig'
+
+#routes
+index:
+    
+	path: /
+  
+	controller: App\Controller\DefaultController::index
+
+
+
+#
+php bin/console assets:install
+
+#
+php bin/console router:match
+
+
+
+#doctrine
+composer require doctrine maker
+
+#create database
+php bin/console doctrine:database:create
+
+#create entity
+php bin/console make:entity Event
+
+#install ORM
+composer require orm
+
+#autoload
+composer dump-autoload
+
+#run server 
+php bin/console server:run
+
+
+#
+ $repository = $this->getDoctrine()->getRepository(Event::class);
+ $events = $repository->findAll();
+
+
+#migrations
+php bin/console doctrine:migrations:diff
+
+#migrations
+php bin/console doctrine:migrations:migrate
+
+#mettre à jour la base de données
+$ php bin/console doctrine:schema:update
+
+#migration Data base
+php bin/console make:migration
+
+#voir les views 
+php bin/console debug:twig
+
+#install bundle api
+composer req api make
+
+#symfony version
+php bin/console --version
+php bin/console about
++++++++++++++++
+
+
